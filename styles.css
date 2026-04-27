@@ -846,9 +846,14 @@ body.promo-dismissed .promo-banner {
 .menu-cats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
   gap: 22px;
   margin-bottom: 60px;
 }
+/* Cards in row 1, details span the full row 2 below — only the active
+   one shows because inactive details are display:none. */
+.menu-cats > .menu-cat { grid-row: 1; }
+.menu-cats > .menu-detail { grid-row: 2; grid-column: 1 / -1; margin-top: 24px; }
 .menu-cat {
   position: relative;
   background: var(--paper);
@@ -2025,7 +2030,18 @@ body.promo-dismissed .promo-banner {
   .byo-body { padding: 40px; }
   .specials-grid { grid-template-columns: 1fr; }
   .bowl-gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .menu-cats { grid-template-columns: repeat(2, 1fr); max-width: 720px; margin: 0 auto 50px; }
+  .menu-cats {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto auto;
+    max-width: 720px;
+    margin: 0 auto 50px;
+  }
+  /* 2x2 cards on tablet, single full-width detail row beneath all four */
+  .menu-cats > .menu-cat:nth-of-type(1) { grid-row: 1; grid-column: 1; }
+  .menu-cats > .menu-cat:nth-of-type(2) { grid-row: 1; grid-column: 2; }
+  .menu-cats > .menu-cat:nth-of-type(3) { grid-row: 2; grid-column: 1; }
+  .menu-cats > .menu-cat:nth-of-type(4) { grid-row: 2; grid-column: 2; }
+  .menu-cats > .menu-detail { grid-row: 3; grid-column: 1 / -1; }
   .menu-cat.active::after { display: none; }
   .signature-grid { grid-template-columns: 1fr; }
   .signature-grid .dish { grid-template-columns: 1fr 1fr; }
@@ -2111,15 +2127,42 @@ body.promo-dismissed .promo-banner {
   .container { padding: 0 22px; }
 
   /* Story */
-  .story-stamp { width: 100px; height: 100px; }
-  .story-stamp strong { font-size: 24px; }
 
   /* Sauces */
   .sauces-row { grid-template-columns: 1fr; gap: 24px; }
 
-  /* Menu cards */
-  .menu-cats { grid-template-columns: 1fr; max-width: 420px; gap: 18px; }
+  /* Menu cards: 1 column, details inline directly below their cards */
+  .menu-cats {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    max-width: 420px;
+    gap: 18px;
+  }
+  .menu-cats > .menu-cat,
+  .menu-cats > .menu-cat:nth-of-type(1),
+  .menu-cats > .menu-cat:nth-of-type(2),
+  .menu-cats > .menu-cat:nth-of-type(3),
+  .menu-cats > .menu-cat:nth-of-type(4),
+  .menu-cats > .menu-detail {
+    grid-row: auto;
+    grid-column: 1;
+    margin-top: 0;
+  }
   .menu-hint { font-size: 13px; padding: 9px 18px; }
+
+  /* Signature dish on mobile: stack image on top of body. The tablet
+     rule (`.signature-grid .dish { grid-template-columns: 1fr 1fr }`)
+     wins over the bare `.dish` mobile override due to higher specificity,
+     so we re-apply with matching specificity here. */
+  .signature-grid .dish { grid-template-columns: 1fr; }
+  .signature-grid .dish-img { aspect-ratio: 16 / 10; }
+
+  /* Story stamp: shrink so it doesn't crowd the section title */
+  .story-images { max-width: 320px; margin: 0 auto; }
+  .story-stamp { width: 86px; height: 86px; top: 4%; right: 4%; }
+  .story-stamp span { font-size: 9px; }
+  .story-stamp strong { font-size: 18px; }
+  .story-stamp em { font-size: 9px; }
 
   /* BYO and dishes */
   .byo-body { padding: 32px 24px; }

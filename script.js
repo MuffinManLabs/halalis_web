@@ -4,7 +4,7 @@
 
 // --- Promo banner dismiss (persists via localStorage) ---
 const promoClose = document.getElementById("promo-close");
-const PROMO_KEY = "halalis-promo-dismissed";
+const PROMO_KEY = "halalis-promo-dismissed-v2";
 try {
   if (localStorage.getItem(PROMO_KEY) === "true") {
     document.body.classList.add("promo-dismissed");
@@ -122,6 +122,24 @@ document.querySelectorAll(".nav-links a").forEach((a) =>
 );
 
 // --- Menu category switcher ---
+// Move each detail panel to live right after its corresponding card,
+// so on mobile (single column) the active detail appears directly below
+// the card that was clicked, instead of after all four cards.
+const _menuCatsContainer = document.querySelector(".menu-cats");
+if (_menuCatsContainer) {
+  document.querySelectorAll(".menu-cat").forEach((card) => {
+    const detail = document.querySelector(
+      `.menu-detail[data-detail="${card.dataset.cat}"]`
+    );
+    if (detail) card.insertAdjacentElement("afterend", detail);
+  });
+  // Hide the now-empty original details wrapper
+  const oldDetails = document.querySelector(".menu-details");
+  if (oldDetails && oldDetails.children.length === 0) {
+    oldDetails.style.display = "none";
+  }
+}
+
 const cats = document.querySelectorAll(".menu-cat");
 const details = document.querySelectorAll(".menu-detail");
 const switchCat = (target) => {
