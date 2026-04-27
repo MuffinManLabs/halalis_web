@@ -2,6 +2,100 @@
 // HALALIS — interactivity
 // ============================================================
 
+// --- Promo banner dismiss (persists via localStorage) ---
+const promoClose = document.getElementById("promo-close");
+const PROMO_KEY = "halalis-promo-dismissed";
+try {
+  if (localStorage.getItem(PROMO_KEY) === "true") {
+    document.body.classList.add("promo-dismissed");
+  }
+} catch (e) {}
+if (promoClose) {
+  promoClose.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.body.classList.add("promo-dismissed");
+    try { localStorage.setItem(PROMO_KEY, "true"); } catch (err) {}
+  });
+}
+
+// --- Live "Open Now" status (hours: 11am – 2am every day) ---
+const navStatus = document.getElementById("nav-status");
+const statusText = navStatus?.querySelector(".status-text");
+const updateStatus = () => {
+  if (!navStatus || !statusText) return;
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const minutesNow = h * 60 + m;
+  // Open: 11:00 (660) → 26:00 (next day 2am, i.e. 0–120 in same day)
+  // Easier: open if h >= 11 OR h < 2
+  const isOpen = h >= 11 || h < 2;
+  // Closing soon: within 30 minutes of 2am close (1:30am – 2:00am)
+  const isClosingSoon = h === 1 && m >= 30;
+
+  navStatus.classList.remove("closing", "closed");
+  if (!isOpen) {
+    navStatus.classList.add("closed");
+    const minsUntilOpen = 11 * 60 - minutesNow;
+    statusText.textContent = minsUntilOpen < 60 ? `Opens in ${minsUntilOpen}m` : "Opens at 11am";
+  } else if (isClosingSoon) {
+    navStatus.classList.add("closing");
+    const minsUntilClose = 60 - m; // h === 1, so close (2am) is 60-m min away
+    statusText.textContent = `Closing in ${minsUntilClose}m`;
+  } else {
+    statusText.textContent = "Open Now";
+  }
+};
+updateStatus();
+setInterval(updateStatus, 60 * 1000);
+
+// --- Count-up stats (animate when hero meta enters view) ---
+const countEls = document.querySelectorAll(".count-up");
+const animateCount = (el) => {
+  const target = parseFloat(el.dataset.target);
+  const decimals = parseInt(el.dataset.decimals || "0", 10);
+  const duration = 1400;
+  const start = performance.now();
+  const tick = (now) => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const value = target * eased;
+    el.textContent = decimals > 0 ? value.toFixed(decimals) : Math.floor(value);
+    if (progress < 1) requestAnimationFrame(tick);
+    else el.textContent = decimals > 0 ? target.toFixed(decimals) : target;
+  };
+  requestAnimationFrame(tick);
+};
+const countObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.4 }
+);
+countEls.forEach((el) => countObserver.observe(el));
+
+// --- Floating order button: hide when order section is in view ---
+const floatingOrder = document.getElementById("floating-order");
+const orderSection = document.getElementById("order");
+if (floatingOrder && orderSection) {
+  const orderObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        floatingOrder.classList.toggle("hidden", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.2 }
+  );
+  orderObserver.observe(orderSection);
+}
+
 // --- Sticky nav background on scroll ---
 const nav = document.getElementById("nav");
 const onScroll = () => {

@@ -15,6 +15,17 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- ===== PROMO BANNER ===== -->
+  <div class="promo-banner" id="promo-banner">
+    <p class="promo-text">
+      <span class="promo-emoji">🎁</span>
+      <strong>10% off at the register</strong> — follow
+      <a href="https://instagram.com/halalisrva" target="_blank" rel="noopener">@halalis</a>
+      on Instagram &amp; TikTok
+    </p>
+    <button class="promo-close" id="promo-close" type="button" aria-label="Dismiss">×</button>
+  </div>
+
   <!-- ===== NAV ===== -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
@@ -27,7 +38,13 @@
         <li><a href="#order">Order</a></li>
         <li><a href="#visit">Visit</a></li>
       </ul>
-      <a href="#order" class="btn btn-primary nav-cta">Order Online</a>
+      <div class="nav-actions">
+        <span class="nav-status" id="nav-status" aria-live="polite">
+          <span class="status-dot"></span>
+          <span class="status-text">Open Now</span>
+        </span>
+        <a href="#order" class="btn btn-primary nav-cta">Order Online</a>
+      </div>
       <button class="nav-burger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -52,7 +69,7 @@
           <a href="#visit" class="btn btn-ghost">Find Us →</a>
         </div>
         <div class="hero-meta">
-          <div><strong>5.0★</strong><span>60+ Google reviews</span></div>
+          <div><strong><span class="count-up" data-target="5" data-decimals="1">0.0</span>★</strong><span><span class="count-up" data-target="60">0</span>+ Google reviews</span></div>
           <div><strong>11am–2am</strong><span>Open every day</span></div>
           <div><strong>$10–20</strong><span>Halal &amp; late night</span></div>
         </div>
@@ -174,6 +191,7 @@
         <p class="lede">
           Pick a category. Pick your protein. We'll handle the rest.
         </p>
+        <p class="menu-hint"><span class="menu-hint-arrow">↓</span> Tap any category below to see the full menu</p>
       </div>
 
       <div class="menu-cats" role="tablist">
@@ -185,7 +203,11 @@
             <span class="menu-cat-num">01</span>
             <h3>Shawarma</h3>
             <p>Marinated chicken or beef, slow-cooked on the spit. Plate or wrap.</p>
-            <span class="menu-cat-cta">View options <span class="cta-arrow">↓</span></span>
+            <span class="menu-cat-cta">
+              <span class="menu-cat-cta-text">See Full Menu</span>
+              <span class="menu-cat-cta-active">Showing Menu</span>
+              <span class="cta-arrow">↓</span>
+            </span>
           </div>
         </article>
 
@@ -197,19 +219,43 @@
             <span class="menu-cat-num">02</span>
             <h3>Bowl</h3>
             <p>Build your own bowl. Or grab a signature like the Super Bowl or Chopped Cheese.</p>
-            <span class="menu-cat-cta">View options <span class="cta-arrow">↓</span></span>
+            <span class="menu-cat-cta">
+              <span class="menu-cat-cta-text">See Full Menu</span>
+              <span class="menu-cat-cta-active">Showing Menu</span>
+              <span class="cta-arrow">↓</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="menu-cat" data-cat="chopped" role="tab" tabindex="0" aria-selected="false">
+          <div class="menu-cat-img">
+            <img src="images/chopped-cheese-sub.png" alt="Halali's chopped cheese" />
+          </div>
+          <div class="menu-cat-body">
+            <span class="menu-cat-num">03</span>
+            <h3>Chopped Cheese</h3>
+            <p>NY-style chopped cheese with Halali's Sauce. Comes with fries and a drink. Footlong upgrade if you're hungry.</p>
+            <span class="menu-cat-cta">
+              <span class="menu-cat-cta-text">See Full Menu</span>
+              <span class="menu-cat-cta-active">Showing Menu</span>
+              <span class="cta-arrow">↓</span>
+            </span>
           </div>
         </article>
 
         <article class="menu-cat" data-cat="crepe" role="tab" tabindex="0" aria-selected="false">
           <div class="menu-cat-img">
-            <img src="images/new-1.png" alt="Halali's crepe" />
+            <img src="images/loaded-nutella-crepe.png" alt="Halali's crepe" />
           </div>
           <div class="menu-cat-body">
-            <span class="menu-cat-num">03</span>
+            <span class="menu-cat-num">04</span>
             <h3>Crepe</h3>
             <p>Build your own, or go classic with the Nutella or PBJ. All hand-folded, oven-warm.</p>
-            <span class="menu-cat-cta">View options <span class="cta-arrow">↓</span></span>
+            <span class="menu-cat-cta">
+              <span class="menu-cat-cta-text">See Full Menu</span>
+              <span class="menu-cat-cta-active">Showing Menu</span>
+              <span class="cta-arrow">↓</span>
+            </span>
           </div>
         </article>
       </div>
@@ -268,20 +314,6 @@
                   <p class="dish-desc">Sliced chicken shawarma, saffron rice, fries, white sauce, Halali's sauce, fresh veggies. The crowd-favorite from day one.</p>
                 </div>
               </article>
-
-              <article class="dish">
-                <div class="dish-img">
-                  <img src="images/cheesesteak-wrap.png" alt="Shawarma Wrap" />
-                  <span class="dish-flag">On the Go</span>
-                </div>
-                <div class="dish-body">
-                  <div class="dish-head">
-                    <h3>Shawarma Wrap</h3>
-                    <span class="dish-price">$10.99</span>
-                  </div>
-                  <p class="dish-desc">Chicken or beef shawarma rolled in toasted lavash with sauces and crisp veggies. Fries on the side.</p>
-                </div>
-              </article>
             </div>
           </div>
         </div>
@@ -321,8 +353,8 @@
           </article>
 
           <div class="signature-section">
-            <p class="eyebrow">House Specials</p>
-            <h3 class="signature-title">The ones we'd order if we worked here.</h3>
+            <p class="eyebrow">House Special</p>
+            <h3 class="signature-title">The one we'd order if we worked here.</h3>
             <div class="signature-grid">
               <article class="dish">
                 <div class="dish-img">
@@ -335,20 +367,6 @@
                     <span class="dish-price">$14.99</span>
                   </div>
                   <p class="dish-desc">Loaded with <strong>chicken, beef, &amp; gyro</strong> over rice and fries with your toppings, finished with Halali's Sauce and Jalapeño Sauce.</p>
-                </div>
-              </article>
-
-              <article class="dish">
-                <div class="dish-img">
-                  <img src="images/new-2.png" alt="Chopped Cheese Meal" />
-                  <span class="dish-flag">NY Style</span>
-                </div>
-                <div class="dish-body">
-                  <div class="dish-head">
-                    <h3>Chopped Cheese Meal</h3>
-                    <span class="dish-price">$12.99 <em class="dish-price-alt">+$4 footlong</em></span>
-                  </div>
-                  <p class="dish-desc">NY-style chopped cheese with Halali's Sauce. Served with fries and your choice of drink. The Main Street late-night classic.</p>
                 </div>
               </article>
             </div>
@@ -373,11 +391,57 @@
           </div>
         </div>
 
+        <!-- CHOPPED CHEESE DETAIL -->
+        <div class="menu-detail" data-detail="chopped">
+          <article class="byo-card">
+            <div class="byo-img">
+              <img src="images/chopped-cheese-sub.png" alt="Halali's Chopped Cheese" />
+              <span class="byo-flag">NY Style</span>
+            </div>
+            <div class="byo-body">
+              <p class="eyebrow">Make It Yours</p>
+              <div class="byo-head">
+                <h3>The Chopped Cheese</h3>
+                <span class="dish-price big">$12.99</span>
+              </div>
+              <p class="byo-tagline">NY-style chopped cheese with Halali's Sauce. Served with fries and a drink.</p>
+              <div class="byo-options">
+                <div class="byo-step">
+                  <span class="byo-step-num">01</span>
+                  <h4>Size</h4>
+                  <p>Regular ($12.99) &nbsp;•&nbsp; Footlong <em>+$4</em></p>
+                </div>
+                <div class="byo-step">
+                  <span class="byo-step-num">02</span>
+                  <h4>Sauce</h4>
+                  <p>White Sauce &nbsp;•&nbsp; Halali's Sauce &nbsp;•&nbsp; Jalapeño-Lime</p>
+                </div>
+                <div class="byo-step">
+                  <span class="byo-step-num">03</span>
+                  <h4>Comes With</h4>
+                  <p>Crispy fries &nbsp;+&nbsp; your choice of drink</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <aside class="feature-row">
+            <div class="feature-row-img">
+              <img src="images/cheesesteak-wrap.png" alt="Chopped cheese wrap" />
+            </div>
+            <div class="feature-row-text">
+              <p class="eyebrow">Off-Menu Tip</p>
+              <h4>Want it as a wrap?</h4>
+              <p>Just ask. Same chopped cheese, same Halali's sauce — rolled up in a toasted lavash with crispy fries on the side.</p>
+            </div>
+          </aside>
+        </div>
+
         <!-- CREPE DETAIL -->
         <div class="menu-detail" data-detail="crepe">
           <article class="byo-card byo-card-sweet">
             <div class="byo-img">
-              <img src="images/new-1.png" alt="Build your own crepe" />
+              <img src="images/loaded-nutella-crepe.png" alt="Build your own crepe" />
               <span class="byo-flag byo-flag-sweet">Make It Yours</span>
             </div>
             <div class="byo-body">
@@ -433,6 +497,17 @@
               </article>
             </div>
           </div>
+
+          <aside class="feature-row">
+            <div class="feature-row-img">
+              <img src="images/nutella-biscoff-crepe.png" alt="Nutella Biscoff crepe build" />
+            </div>
+            <div class="feature-row-text">
+              <p class="eyebrow">Staff Pick</p>
+              <h4>The Lotus Drown</h4>
+              <p>Heavy on Nutella, heavier on Biscoff crumbles, dusted with powdered sugar. The build the staff orders on break.</p>
+            </div>
+          </aside>
 
           <aside class="byoc">
             <div class="byoc-icon">🍬</div>
@@ -667,6 +742,12 @@
       <span>Made with ♥ on Main Street</span>
     </div>
   </footer>
+
+  <!-- ===== FLOATING ORDER BUTTON ===== -->
+  <a href="#order" class="floating-order" id="floating-order" aria-label="Order online">
+    <span class="floating-order-icon">🥙</span>
+    <span class="floating-order-text">Order Now</span>
+  </a>
 
   <script src="script.js"></script>
 </body>
