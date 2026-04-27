@@ -2,20 +2,18 @@
 // HALALIS — interactivity
 // ============================================================
 
-// --- Promo banner dismiss (persists via localStorage) ---
+// --- Promo banner dismiss (session-only; always shows on fresh page load) ---
 const promoClose = document.getElementById("promo-close");
-const PROMO_KEY = "halalis-promo-dismissed-v2";
+// Clear any old dismissal flags from previous versions so the banner shows
 try {
-  if (localStorage.getItem(PROMO_KEY) === "true") {
-    document.body.classList.add("promo-dismissed");
-  }
+  localStorage.removeItem("halalis-promo-dismissed");
+  localStorage.removeItem("halalis-promo-dismissed-v2");
 } catch (e) {}
 if (promoClose) {
   promoClose.addEventListener("click", function (e) {
     e.preventDefault();
     e.stopPropagation();
     document.body.classList.add("promo-dismissed");
-    try { localStorage.setItem(PROMO_KEY, "true"); } catch (err) {}
   });
 }
 
