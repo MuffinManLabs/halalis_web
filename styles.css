@@ -2158,11 +2158,31 @@ body.promo-dismissed .promo-banner {
   .signature-grid .dish-img { aspect-ratio: 16 / 10; }
 
   /* Story stamp: shrink so it doesn't crowd the section title */
-  .story-images { max-width: 320px; margin: 0 auto; }
-  .story-stamp { width: 86px; height: 86px; top: 4%; right: 4%; }
-  .story-stamp span { font-size: 9px; }
-  .story-stamp strong { font-size: 18px; }
-  .story-stamp em { font-size: 9px; }
+  /* Story: explicit height, smaller pixel-positioned stamp, more gap so
+     there's no chance the stamp can creep into the text below. */
+  .story-grid { gap: 56px; align-items: stretch; }
+  .story-images {
+    max-width: 320px;
+    width: 100%;
+    height: 320px;
+    aspect-ratio: auto;
+    margin: 0 auto 20px;
+    position: relative;
+    overflow: visible;
+  }
+  .story-stamp {
+    width: 68px;
+    height: 68px;
+    top: 6px;
+    right: 6px;
+    bottom: auto;
+    left: auto;
+    transform: rotate(-8deg);
+    border-width: 1.5px;
+  }
+  .story-stamp span { font-size: 8px; letter-spacing: 0.14em; }
+  .story-stamp strong { font-size: 15px; }
+  .story-stamp em { font-size: 8px; letter-spacing: 0.12em; margin-top: 1px; }
 
   /* BYO and dishes */
   .byo-body { padding: 32px 24px; }
