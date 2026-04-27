@@ -3,12 +3,24 @@
 // ============================================================
 
 // --- Promo banner dismiss (session-only; always shows on fresh page load) ---
-const promoClose = document.getElementById("promo-close");
-// Clear any old dismissal flags from previous versions so the banner shows
+// Always reset to the visible state on load — defends against bfcache,
+// stale class state, or any leftover flags from previous versions.
+document.body.classList.remove("promo-dismissed");
 try {
   localStorage.removeItem("halalis-promo-dismissed");
   localStorage.removeItem("halalis-promo-dismissed-v2");
+  sessionStorage.removeItem("halalis-promo-dismissed");
+  sessionStorage.removeItem("halalis-promo-dismissed-v2");
 } catch (e) {}
+
+// If the page is restored from bfcache, also reset visibility there
+window.addEventListener("pageshow", (e) => {
+  if (e.persisted) {
+    document.body.classList.remove("promo-dismissed");
+  }
+});
+
+const promoClose = document.getElementById("promo-close");
 if (promoClose) {
   promoClose.addEventListener("click", function (e) {
     e.preventDefault();
